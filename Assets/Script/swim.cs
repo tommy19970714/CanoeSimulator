@@ -13,9 +13,9 @@ public class swim : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate (new Vector3 (1f, 2f, 0f));
-		Vector3 canuePosition = canue.transform.position;
-		canuePosition.y += 0.9f;
-		transform.position = canuePosition;
+		transform.Rotate (new Vector3 (1f, 0, 2.5f));
+		//Vector3 canuePosition = canue.transform.position;
+		//canuePosition.y += 0.3f;
+		//transform.position = canuePosition;
 	}
 }
