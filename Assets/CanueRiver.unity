@@ -2090,7 +2090,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2088216867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7dd579accf2b774395a9ec878d056d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 04b66f83983bd8548b450da7c92558c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDriver: {fileID: 2145131465}
