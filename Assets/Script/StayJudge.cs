@@ -16,8 +16,8 @@ public class StayJudge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("right" + rightSinkCounter.ToString());
-        Debug.Log("left" + leftSinkCounter.ToString());
+        //Debug.Log("right" + rightSinkCounter.ToString());
+        //Debug.Log("left" + leftSinkCounter.ToString());
     }
 
     private void OnTriggerStay(Collider collider)
