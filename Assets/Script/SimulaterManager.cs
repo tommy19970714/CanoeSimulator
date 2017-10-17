@@ -104,11 +104,19 @@ public class SimulaterManager : MonoBehaviour {
         float pdx_l = paddle_left.getVariation().x * 10.0f;
         float pdz_l = paddle_left.getVariation().z * 10.0f;
 
+        // パドルの速さ
+        float paddle_xvel_r = paddle_right.getVariation().x / Time.deltaTime;
+        float paddle_zvel_r = paddle_right.getVariation().z / Time.deltaTime;
+
+        float paddle_xvel_l = paddle_left.getVariation().x / Time.deltaTime;
+        float paddle_zvel_l = paddle_left.getVariation().z / Time.deltaTime;
+
+
         // 左右のパドルの中心とカヌーの重心の距離
         float distance_r = Vector3.Distance(Vector3.zero, paddle_right.position);
         float distance_l = Vector3.Distance(Vector3.zero, paddle_left.position);
 
-        float constXZ = 0.007f; // xv zvを求めるための定数
+        float constXZ = 0.00023f; // xv zvを求めるための定数
         float constR = 0.1f; // rvを求めるための定数
         float constFliction = 0.05f; //水の抵抗
         //paddleAngle.zは360度法の値が返ってきます.ラジアンに変換しましょう
@@ -118,14 +126,19 @@ public class SimulaterManager : MonoBehaviour {
         //velocity.z += (constXZ * paddle_right.sinkLevel * pdx_r) * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad)) + (constXZ * paddle_left.sinkLevel * -pdx_l) * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad));// - constFliction * velocity.x; // paddleAngle.zをかける 
         //velocity.x += (constXZ * paddle_right.sinkLevel * pdz_r) * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad)) + (constXZ * paddle_left.sinkLevel * pdz_l) * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad));// - constFliction * velocity.z; // paddleAngle.zをかける
 
-        velocity.x += (constXZ * paddle_right.sinkLevel * -pdx_r) * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad)) + (constXZ * paddle_left.sinkLevel * -pdx_l) * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad));// - constFliction * velocity.x; // paddleAngle.zをかける 
-        velocity.z += (constXZ * paddle_right.sinkLevel * -pdz_r) * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad)) + (constXZ * paddle_left.sinkLevel * -pdz_l) * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad));// - constFliction * velocity.z; // paddleAngle.zをかける
+        //velocity.x += (constXZ * paddle_right.sinkLevel * -pdx_r) * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad)) + (constXZ * paddle_left.sinkLevel * -pdx_l) * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad));// - constFliction * velocity.x; // paddleAngle.zをかける 
+        //velocity.z += (constXZ * paddle_right.sinkLevel * -pdz_r) * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad)) + (constXZ * paddle_left.sinkLevel * -pdz_l) * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad));// - constFliction * velocity.z; // paddleAngle.zをかける
 
-        Debug.Log("v_x paddleAngle" + Mathf.Abs(Mathf.Sin(paddleAngleZ_rad)).ToString());
+        velocity.x -= constXZ * ((velocity.x + paddle_xvel_r) * paddle_right.sinkLevel * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad)) + ((velocity.x + paddle_xvel_l) * paddle_left.sinkLevel * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad))));
+        velocity.z -= constXZ * ((velocity.z + paddle_zvel_r) * paddle_right.sinkLevel * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad)) + ((velocity.z + paddle_zvel_l) * paddle_left.sinkLevel * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad))));
+        //Debug.Log("velocity.x = " + velocity.x );
+        //Debug.Log("pdx_r = " + pdx_r);
+        Debug.Log(velocity.x + pdx_l);
+        //Debug.Log("v_x paddleAngle" + Mathf.Abs(Mathf.Sin(paddleAngleZ_rad)).ToString());
         //Debug.Log("v x" + velocity.x.ToString());
         //Debug.Log("v z" + velocity.z.ToString());
 
-        velocity.z *= 0.5f;
+        velocity.z *= 0.995f;
         velocity.x *= 0.995f;
 
         Debug.Log(paddleAngle);
