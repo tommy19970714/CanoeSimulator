@@ -673,6 +673,14 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2082592, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
+      propertyPath: m_TargetEye
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2008320, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
+      propertyPath: m_TargetEye
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11420968, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
@@ -2479,7 +2487,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2145131465}
   m_LocalRotation: {x: -0.115970016, y: 0.69854856, z: -0.11631842, w: -0.69645596}
-  m_LocalPosition: {x: -0.16999818, y: 0.5099983, z: -0.000000014901161}
+  m_LocalPosition: {x: -0.16999818, y: 0.18, z: -0.000000014901161}
   m_LocalScale: {x: 0.020000003, y: 0.020000001, z: 0.020000001}
   m_Children: []
   m_Father: {fileID: 868409310}
