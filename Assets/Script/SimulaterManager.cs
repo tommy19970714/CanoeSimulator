@@ -70,7 +70,7 @@ public class SimulaterManager : MonoBehaviour {
 
         // カヌーの回転と移動
         canoe.transform.Translate(velocity.x * Time.deltaTime, 0, velocity.z * Time.deltaTime);
-        //canoe.transform.Rotate(0, rVelocity * Time.deltaTime, 0);
+        canoe.transform.Rotate(0, rVelocity * Time.deltaTime, 0);
         //canoe.transform.Translate(velocity.x * Time.deltaTime, 0, 0);
         //canoe.transform.Translate(0, 0, velocity.z * Time.deltaTime);
         //canoe.transform.Translate(0, 0, 0);
@@ -117,7 +117,7 @@ public class SimulaterManager : MonoBehaviour {
         float distance_l = Vector3.Distance(Vector3.zero, paddle_left.position);
 
         float constXZ = 0.00023f; // xv zvを求めるための定数
-        float constR = 0.1f; // rvを求めるための定数
+        float constY = 0.085f; // rvを求めるための定数
         float constFliction = 0.05f; //水の抵抗
         //paddleAngle.zは360度法の値が返ってきます.ラジアンに変換しましょう
         float paddleAngleZ_rad = paddleAngle.z * (Mathf.PI / 180.0f);
@@ -133,7 +133,7 @@ public class SimulaterManager : MonoBehaviour {
         velocity.z -= constXZ * ((velocity.z + paddle_zvel_r) * paddle_right.sinkLevel * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad)) + ((velocity.z + paddle_zvel_l) * paddle_left.sinkLevel * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad))));
         //Debug.Log("velocity.x = " + velocity.x );
         //Debug.Log("pdx_r = " + pdx_r);
-        Debug.Log(velocity.x + pdx_l);
+        //Debug.Log(velocity.x + pdx_l);
         //Debug.Log("v_x paddleAngle" + Mathf.Abs(Mathf.Sin(paddleAngleZ_rad)).ToString());
         //Debug.Log("v x" + velocity.x.ToString());
         //Debug.Log("v z" + velocity.z.ToString());
@@ -141,7 +141,7 @@ public class SimulaterManager : MonoBehaviour {
         velocity.z *= 0.995f;
         velocity.x *= 0.995f;
 
-        Debug.Log(paddleAngle);
+        //Debug.Log(paddleAngle);
 
         //if (velocity.z != 0) {
         //    velocity.z = Mathf.Sqrt(Mathf.Abs(velocity.z)) * (velocity.z / Mathf.Abs(velocity.z));
@@ -159,6 +159,13 @@ public class SimulaterManager : MonoBehaviour {
         //Debug.Log("v z" + velocity.z.ToString());
 
         // y軸の角速度を求める
+        float theta_r = Mathf.Atan2(paddle_right.position.x, paddle_right.position.z);
+        float theta_l = Mathf.Atan2(paddle_left.position.x, paddle_left.position.z);
+        Debug.Log(theta_r);
+        rVelocity -= constY * distance_r * (pdz_r * Mathf.Sin(theta_r) + pdx_r * Mathf.Cos(theta_r)) * paddle_right.sinkLevel;
+        rVelocity += constY * distance_l * (pdz_l * Mathf.Sin(theta_l) + pdx_r * Mathf.Cos(theta_l)) * paddle_left.sinkLevel;
+        Debug.Log(rVelocity);
+        rVelocity *= 0.95f;
         //rVelocity += constR / distance_l * Mathf.Sqrt(pdx_l * pdx_l + pdz_l * pdz_l);
         //rVelocity -= constR / distance_r * Mathf.Sqrt(pdx_r * pdx_r + pdz_r * pdz_r);
     }
