@@ -18,7 +18,8 @@ public class RealTimeController : ControlModel {
 	//temp変数
 	private float height;
 	private float beforeheight = 0;
-	private Vector3 rotationrad = new Vector3(0, 0, 0);
+	public Vector3 rotationrad = new Vector3(0, 0, 0);
+    public Vector3 canoeRotation = Vector3.zero;
 
 	//switch 変数
 	public bool pause = false;
@@ -31,7 +32,14 @@ public class RealTimeController : ControlModel {
 		StartCoroutine("waitThread");
 	}
 
-	IEnumerator waitThread()
+    void Update()
+    {
+        canoeRotation = - rotationrad * (180.0f / Mathf.PI); 
+        Vector3 beforeRotation = canoe.transform.rotation.eulerAngles;
+        canoe.transform.Rotate(new Vector3(canoeRotation.z - beforeRotation.x, 0, 0));
+    }
+
+    IEnumerator waitThread()
 	{
 		yield return new WaitWhile(() => (started == false));
 
@@ -108,26 +116,18 @@ public class RealTimeController : ControlModel {
 						if (realtimedata.y.Count > 1)
 						{
 							beforeheight = realtimedata.y.Dequeue();
-							//Debug.Log(beforeheight);
 							height = realtimedata.y.Peek();
 							control_height(height, beforeheight);
 							allControl(rotationrad,true);
-							canoe.transform.Rotate (rotationrad * (Mathf.PI / 180.0f));
-							Debug.Log(rotationrad);
 						}
 					}
 				}
 				else
 				{
-					Debug.Log("empty");
+					//Debug.Log("empty");
 				}
 			}
 			Debug.Log("thread exit");
 		}
-	}
-
-	void Update()
-	{
-
 	}
 }

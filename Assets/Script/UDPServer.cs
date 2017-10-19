@@ -12,8 +12,8 @@ public class UDPServer : MonoBehaviour
 	public RealTimeController realtimeControl;
 
 	private Thread thread;
-	public string localIpString;
-	public int localPort;
+	public string localIpString = "192.168.1.240";
+    public int localPort = 22227;
 	public bool serverEnabled = true;
 	public object lockobject;
 
@@ -24,6 +24,7 @@ public class UDPServer : MonoBehaviour
 		server();
 		lockobject = new object();
 	}
+
 	public void server()
 	{
 		//バインドするローカルIPとポート番号
@@ -34,8 +35,8 @@ public class UDPServer : MonoBehaviour
 			udp = new UdpClient(localEP);
 			thread.Start();
 			serverEnabled = true;
-			//UdpClientを作成し、ローカルエンドポイントにバインドする
-		} catch {
+            //UdpClientを作成し、ローカルエンドポイントにバインドする
+        } catch {
 			Debug.LogError("udpのポートを開放できません。");
 		}
 	}
@@ -53,8 +54,8 @@ public class UDPServer : MonoBehaviour
 		} catch {
 			Debug.LogError("udpのポートを開放できません。");
 		}
-
 	}
+
 	public void threadstop()
 	{
 		serverEnabled = false;

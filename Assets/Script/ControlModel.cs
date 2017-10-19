@@ -14,9 +14,11 @@ public class ControlModel : MonoBehaviour {
 	private float middle = 37.5f;
 	private float max = 92.5f;
 	private float min = 0.0f;
+    public float limitDegree = 15;
+    private float a = (float)0.8;//ハイパスの定数
 
-	//モーションテーブルの制御値を返すmethod
-	public Vector3 allControl(Vector3 rotation, bool send)
+    //モーションテーブルの制御値を返すmethod
+    public Vector3 allControl(Vector3 rotation, bool send)
 	{
 		Vector3 move = controlAngle3 (limitRotation(rotation));
 
@@ -148,8 +150,8 @@ public class ControlModel : MonoBehaviour {
 
 
 		//!!!! S H I R A N A I !!!!
-		float theta = - degree.z / (float)Math.PI * 180f;
-		float psi = degree.x / (float)Math.PI * 180f;
+		float theta = - degree.z / (float)Mathf.PI * 180f;
+		float psi = degree.x / (float)Mathf.PI * 180f;
 		//!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		//Debug.Log("theta = "+ theta + "[deg]");
