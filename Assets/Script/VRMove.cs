@@ -13,6 +13,13 @@ public class VRMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        this.transform.rotation = cameraDriver.transform.rotation;
+
+        //Quaternion tmp = cameraDriver.transform.rotation;
+        //tmp.y = cameraDriver.transform.rotation.y;
+        //tmp.x = cameraDriver.transform.rotation.x;
+        //this.transform.rotation = tmp;
+
         Vector3 pos = cameraDriver.transform.position;
         pos.y += 1.0f;
         this.transform.position = pos;
