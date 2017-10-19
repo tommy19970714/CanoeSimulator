@@ -713,7 +713,7 @@ Transform:
   m_GameObject: {fileID: 848546887}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 50, y: 38, z: 50}
   m_Children: []
   m_Father: {fileID: 868409310}
   m_RootOrder: 0
@@ -1019,7 +1019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!154 &871559227
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -2501,7 +2501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {x: 0, y: 0, z: 0}
-  com: COM6
+  com: COM8
   baudrate: 38400
   message: 
   done: 0
@@ -2585,7 +2585,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2145131465}
   m_LocalRotation: {x: -0.115970016, y: 0.69854856, z: -0.11631842, w: -0.69645596}
-  m_LocalPosition: {x: -0.16999818, y: 0.18, z: -0.000000014901161}
+  m_LocalPosition: {x: -0.16999818, y: 0.24, z: -0.000000014901161}
   m_LocalScale: {x: 0.020000003, y: 0.020000001, z: 0.020000001}
   m_Children: []
   m_Father: {fileID: 868409310}

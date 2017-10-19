@@ -34,7 +34,7 @@ public class RealTimeController : ControlModel {
 
     void Update()
     {
-        canoeRotation = - rotationrad * (180.0f / Mathf.PI); 
+        canoeRotation = rotationrad * (180.0f / Mathf.PI) * 5; 
         Vector3 beforeRotation = canoe.transform.rotation.eulerAngles;
         canoe.transform.Rotate(new Vector3(canoeRotation.z - beforeRotation.x, 0, 0));
     }
@@ -46,9 +46,9 @@ public class RealTimeController : ControlModel {
 		yield return new WaitForSeconds (realtimeOffset);
 
 		Debug.Log ("thread start");
-		control = new Thread(new ThreadStart(threadcontrol));
-		control.Start();
-	}
+        startmotion();
+
+    }
 
 	public void startmotion()
 	{

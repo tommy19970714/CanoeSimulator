@@ -116,6 +116,6 @@ public class SimulaterManager : MonoBehaviour {
         rVelocity -= constY * distance_r * (pdz_r * Mathf.Sin(theta_r) + pdx_r * Mathf.Cos(theta_r)) * paddle_right.sinkLevel;
         rVelocity += constY * distance_l * (pdz_l * Mathf.Sin(theta_l) + pdx_r * Mathf.Cos(theta_l)) * paddle_left.sinkLevel;
         //Debug.Log(rVelocity);
-        rVelocity *= 0.95f;
+        rVelocity *= 0.90f;
     }
 }
