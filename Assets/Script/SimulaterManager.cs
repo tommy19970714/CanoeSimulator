@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SimulaterManager : MonoBehaviour {
 
@@ -55,6 +56,7 @@ public class SimulaterManager : MonoBehaviour {
     }
     
     void Update () {
+
         ParametorUpdate();
         Control();
         
