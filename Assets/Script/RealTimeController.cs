@@ -8,9 +8,9 @@ using System.Threading;
 public class RealTimeController : ControlModel {
 
 	// 外部クラス
-	public GameObject sphere;
 	public UDPServer udpserver;
 	public RealTimeDataManager realtimedata;
+	public GameObject canoe;
 
 	//定数
 	public float realtimeOffset = 0;
@@ -112,6 +112,7 @@ public class RealTimeController : ControlModel {
 							height = realtimedata.y.Peek();
 							control_height(height, beforeheight);
 							allControl(rotationrad,true);
+							canoe.transform.Rotate (rotationrad * (Mathf.PI / 180.0f));
 							Debug.Log(rotationrad);
 						}
 					}

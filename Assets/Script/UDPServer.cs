@@ -15,7 +15,7 @@ public class UDPServer : MonoBehaviour
 	public string localIpString;
 	public int localPort;
 	public bool serverEnabled = true;
-	private object lockobject;
+	public object lockobject;
 
 	void Start()
 	{
