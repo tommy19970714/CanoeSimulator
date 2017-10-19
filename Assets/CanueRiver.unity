@@ -2457,6 +2457,104 @@ GameObject:
   m_PrefabParentObject: {fileID: 1921655712373452, guid: 36eb89c4d430bc94fa02a75b5476255b,
     type: 2}
   m_PrefabInternal: {fileID: 2102984407}
+--- !u!1 &2116676144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2116676145}
+  - component: {fileID: 2116676149}
+  - component: {fileID: 2116676148}
+  - component: {fileID: 2116676147}
+  - component: {fileID: 2116676146}
+  m_Layer: 0
+  m_Name: RealtimeController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2116676145
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116676144}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 250.67993, y: 23.539038, z: 43.040764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2116676146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116676144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d66610b573e04d45b1d22984e721686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {x: 0, y: 0, z: 0}
+  com: COM6
+  baudrate: 38400
+  message: 
+  done: 0
+  h: {x: 0, y: 0, z: 0}
+--- !u!114 &2116676147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116676144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1a9cc387b0b4522adc797e01d42321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  realtimedata: {fileID: 2116676148}
+  realtimeControl: {fileID: 2116676149}
+  localIpString: 192.168.1.240
+  localPort: 22227
+  serverEnabled: 1
+--- !u!114 &2116676148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116676144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80daaea6a3bbd487ba308c40f31b19cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beforerad: {x: 0, y: 0, z: 0}
+--- !u!114 &2116676149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116676144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20e8eb30f4bf40fba5575f4cac6656e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serial: {fileID: 2116676146}
+  limitDegree: 15
+  udpserver: {fileID: 2116676147}
+  realtimedata: {fileID: 2116676148}
+  canoe: {fileID: 868409306}
+  realtimeOffset: 0
+  rotationrad: {x: 0, y: 0, z: 0}
+  canoeRotation: {x: 0, y: 0, z: 0}
+  pause: 0
+  started: 0
 --- !u!1 &2145131465
 GameObject:
   m_ObjectHideFlags: 0
