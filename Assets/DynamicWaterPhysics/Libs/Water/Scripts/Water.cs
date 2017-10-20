@@ -700,7 +700,7 @@ namespace UnityStandardAssets.Water
             dest.farClipPlane = src.farClipPlane;
             dest.nearClipPlane = src.nearClipPlane;
             dest.orthographic = src.orthographic;
-            if (!UnityEngine.VR.VRDevice.isPresent)
+            if (!UnityEngine.XR.XRDevice.isPresent)
                 dest.fieldOfView = src.fieldOfView;
             dest.aspect = src.aspect;
             dest.orthographicSize = src.orthographicSize;
