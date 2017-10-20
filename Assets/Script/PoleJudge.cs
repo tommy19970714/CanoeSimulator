@@ -18,8 +18,11 @@ public class PoleJudge : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
+        Debug.Log("Ontrigger");
+        Debug.Log(other.transform.tag);
 		if (other.gameObject.CompareTag("Canoe"))
 		{
+            Debug.Log("on canoe");
 			gameController.addCounter (this.GetInstanceID());
 			Debug.Log (this.GetInstanceID());
 		}

@@ -7,15 +7,15 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
 
 	public int polecounter;
-	public Text countLabel;
-	public Text timerLabel;
+	public GameObject countLabel;
+	public GameObject timerLabel;
 	private List<int> idList = new List<int>();
 	public float timer = 0;
 	public int LimitTime = 30;
 
 	// Use this for initialization
 	void Start () {
-		countLabel.text = "0";
+        countLabel.GetComponent<TextMesh>().text = "0";
 	}
 
 	// Update is called once per frame
@@ -26,14 +26,16 @@ public class GameController : MonoBehaviour {
 			PlayerPrefs.SetInt ("Score", polecounter);
 			SceneManager.LoadScene ("EndScene");
 		}
-		timerLabel.text = remainTime.ToString ();
+        timerLabel.GetComponent<TextMesh>().text = remainTime.ToString ();
 	}
 
 	public void addCounter(int id) {
+        Debug.Log("addcounter");
 		if (idList.FindAll (x => x == id).Count == 0) {
 			polecounter += 1;
 			idList.Add (id);
+            Debug.Log("add counter count = 0");
 		}
-		countLabel.text = polecounter.ToString ();
+        countLabel.GetComponent<TextMesh>().text = polecounter.ToString ();
 	}
 }
