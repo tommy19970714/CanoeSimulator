@@ -31,7 +31,7 @@ public class StartMenuManager : MonoBehaviour {
 	}
 	
 	public void OnClickHostButton() {
-		SceneManager.LoadScene ("CanoeRiver");
+		SceneManager.LoadScene ("CanueRiver");
 	}
 
 	public void OnClickClientButton() {

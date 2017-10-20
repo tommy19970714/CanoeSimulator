@@ -15,7 +15,7 @@ public class EndMenuManager: MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey(KeyCode.Space)) { // もう一度
-			SceneManager.LoadScene ("CanoeRiver");
+			SceneManager.LoadScene ("CanueRiver");
 		}
 		if (Input.GetKey (KeyCode.Space)) { // 初期画面に戻る 
 			SceneManager.LoadScene ("StartScene");

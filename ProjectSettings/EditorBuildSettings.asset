@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/StartScene.unity
+    guid: 1b60b8d4383854a86854c55c2acfde64
+  - enabled: 1
     path: Assets/CanueRiver.unity
     guid: 023e4c32b4adf4fc3948b5d62cc537cc
-  - enabled: 0
-    path: Assets/testViveControler.unity
-    guid: 847055534af1cd84daf72cce1da2ae3a
+  - enabled: 1
+    path: Assets/Client.unity
+    guid: 2649cffeaf662314d841cfd4548feeb0
+  - enabled: 1
+    path: Assets/EndScene.unity
+    guid: 6e568910f02fd4d5ea92f5f7d1027576

@@ -36,7 +36,7 @@ public class RealTimeController : ControlModel {
     {
         canoeRotation = rotationrad * (180.0f / Mathf.PI) * 5; 
         Vector3 beforeRotation = canoe.transform.rotation.eulerAngles;
-        canoe.transform.Rotate(new Vector3(canoeRotation.z - beforeRotation.x, 0, 0));
+        canoe.transform.Rotate(new Vector3(canoeRotation.z - beforeRotation.x, 0, canoeRotation.x - beforeRotation.z));
     }
 
     IEnumerator waitThread()
