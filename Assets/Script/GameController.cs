@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -22,7 +23,8 @@ public class GameController : MonoBehaviour {
 		timer += Time.deltaTime;
 		int remainTime = LimitTime - (int)timer;
 		if(remainTime < 0) {
-			Application.LoadLevel("EndSene");
+			PlayerPrefs.SetInt ("Score", polecounter);
+			SceneManager.LoadScene ("EndScene");
 		}
 		timerLabel.text = remainTime.ToString ();
 	}
