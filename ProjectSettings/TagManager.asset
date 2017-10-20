@@ -9,6 +9,7 @@ TagManager:
   - Water
   - Paddle_right
   - Paddle_left
+  - Canoe
   layers:
   - Default
   - TransparentFX
