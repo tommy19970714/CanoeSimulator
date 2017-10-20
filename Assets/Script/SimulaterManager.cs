@@ -114,7 +114,7 @@ public class SimulaterManager : MonoBehaviour {
         float theta_l = Mathf.Atan2(paddle_left.position.x, paddle_left.position.z);
         //Debug.Log(theta_r);
         rVelocity -= constY * distance_r * (pdz_r * Mathf.Sin(theta_r) + pdx_r * Mathf.Cos(theta_r)) * paddle_right.sinkLevel;
-        rVelocity += constY * distance_l * (pdz_l * Mathf.Sin(theta_l) + pdx_r * Mathf.Cos(theta_l)) * paddle_left.sinkLevel;
+        rVelocity += constY * distance_l * (pdz_l * Mathf.Sin(theta_l) + pdx_l * Mathf.Cos(theta_l)) * paddle_left.sinkLevel;
         //Debug.Log(rVelocity);
         rVelocity *= 0.90f;
     }
