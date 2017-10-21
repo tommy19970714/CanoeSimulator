@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        countLabel.GetComponent<TextMesh>().text = "0";
+        countLabel.GetComponent<TextMesh>().text = "Score: 0";
 	}
 
 	// Update is called once per frame
@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
 			PlayerPrefs.SetInt ("Score", polecounter);
 			SceneManager.LoadScene ("EndScene");
 		}
-        timerLabel.GetComponent<TextMesh>().text = remainTime.ToString ();
+        timerLabel.GetComponent<TextMesh>().text = "残り時間:" + remainTime.ToString () + "秒";
 	}
 
 	public void addCounter(int id) {
@@ -36,6 +36,6 @@ public class GameController : MonoBehaviour {
 			idList.Add (id);
             Debug.Log("add counter count = 0");
 		}
-        countLabel.GetComponent<TextMesh>().text = polecounter.ToString ();
+        countLabel.GetComponent<TextMesh>().text = "Score: " + polecounter.ToString ();
 	}
 }
