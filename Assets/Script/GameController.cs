@@ -16,15 +16,20 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         countLabel.GetComponent<TextMesh>().text = "Score: 0";
-	}
+
+        // 衝突を無視するように設定
+        int layer1 = LayerMask.NameToLayer("Canoe");
+        int layer2 = LayerMask.NameToLayer("Paddle");
+        Physics.IgnoreLayerCollision(layer1, layer2);
+    }
 
 	// Update is called once per frame
 	void Update () {
 		timer += Time.deltaTime;
 		int remainTime = LimitTime - (int)timer;
 		if(remainTime < 0) {
-			PlayerPrefs.SetInt ("Score", polecounter);
-			SceneManager.LoadScene ("EndScene");
+			//PlayerPrefs.SetInt ("Score", polecounter);
+			//SceneManager.LoadScene ("EndScene");
 		}
         timerLabel.GetComponent<TextMesh>().text = "残り時間:" + remainTime.ToString () + "秒";
 	}

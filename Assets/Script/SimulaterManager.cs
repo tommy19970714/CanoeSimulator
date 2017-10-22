@@ -52,11 +52,6 @@ public class SimulaterManager : MonoBehaviour {
         leftObject = paddle.transform.Find("Left").gameObject;
         paddle_right = new Paddle(rightObject.transform.position);
         paddle_left = new Paddle(leftObject.transform.position);
-
-        // 衝突を無視するように設定
-        int layer1 = LayerMask.NameToLayer("Canoe");
-        int layer2 = LayerMask.NameToLayer("Paddle");
-        Physics.IgnoreLayerCollision(layer1, layer2);
     }
     
     void Update () {
