@@ -21,7 +21,6 @@ public class VRMove : MonoBehaviour {
         //this.transform.rotation = tmp;
 
         Vector3 pos = cameraDriver.transform.position;
-        pos.y += 1.0f;
         this.transform.position = pos;
     }
 }
