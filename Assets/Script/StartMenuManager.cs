@@ -14,9 +14,10 @@ public class StartMenuManager : MonoBehaviour {
 	public Button clientButton;
 	public Text ipAddressLabel;
 	public InputField portInputField;
+    public InputField hostIpAddressField;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		if (dropdown) {
 			dropdown.ClearOptions();
 			string [] ports = SerialPort.GetPortNames ();
@@ -28,6 +29,7 @@ public class StartMenuManager : MonoBehaviour {
 
 		ipAddressLabel.text = "IPAddress: " + UnityEngine.Network.player.ipAddress;
 		portInputField.text = PlayerPrefs.GetInt ("realtimeUdpPort", 22227).ToString();
+        hostIpAddressField.text = PlayerPrefs.GetString("hostIpAddress", "192.168.1.240");
 	}
 	
 	public void OnClickHostButton() {
@@ -46,8 +48,14 @@ public class StartMenuManager : MonoBehaviour {
 		PlayerPrefs.Save ();
 	}
 
-	public void ValueChangedInputField() {
+	public void ValueChangedPortField() {
 		PlayerPrefs.SetInt ("replayUdpPort", int.Parse(portInputField.text));
 		PlayerPrefs.Save ();
 	}
+
+    public void ValueChangedHostIpAddressField()
+    {
+        PlayerPrefs.SetString("hostIpAddress", hostIpAddressField.text);
+        PlayerPrefs.Save();
+    }
 }
