@@ -8,8 +8,9 @@ public class PoleJudge : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        GameObject gameControllerObject = GameObject.Find("/GameController");
+        gameController = gameControllerObject.GetComponent<GameController>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -18,7 +19,7 @@ public class PoleJudge : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-        Debug.Log("Ontrigger");
+        Debug.Log("Ontrigger"); 
         Debug.Log(other.transform.tag);
 		if (other.gameObject.CompareTag("Canoe"))
 		{
