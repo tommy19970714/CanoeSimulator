@@ -22,6 +22,8 @@ public class SimulaterManager : MonoBehaviour {
     private Vector3 position = Vector3.zero;
     private float rVelocity = 0;
     public Vector3 rotationrad = new Vector3(0, 0, 0);
+
+    public bool isStarted = false;
     
     class Paddle {
         public Vector3 position;
@@ -48,23 +50,35 @@ public class SimulaterManager : MonoBehaviour {
     }
 
     void Start () {
-        // init
+        StartCoroutine("WaitInit");
+    }
+
+    IEnumerator WaitInit()
+    {
+        yield return new WaitForSeconds(2.0f);
+        isStarted = true;
+
+        paddle = GameObject.Find("/Paddle(Clone)");
         rightObject = paddle.transform.Find("Right").gameObject;
         leftObject = paddle.transform.Find("Left").gameObject;
         paddle_right = new Paddle(rightObject.transform.position);
         paddle_left = new Paddle(leftObject.transform.position);
     }
-    
+
+
     void Update () {
-        ParametorUpdate();
-        Control();
+        if (isStarted)
+        {
+            ParametorUpdate();
+            Control();
 
-        // カヌーの回転と移動
-        Vector3 canoeRotation = rotationrad * (180.0f / Mathf.PI) * 1.7f;
-        Vector3 beforeRotation = canoe.transform.rotation.eulerAngles;
+            // カヌーの回転と移動
+            Vector3 canoeRotation = rotationrad * (180.0f / Mathf.PI) * 1.7f;
+            Vector3 beforeRotation = canoe.transform.rotation.eulerAngles;
 
-        canoe.transform.Translate(velocity.x * Time.deltaTime, 0, velocity.z * Time.deltaTime);
-        canoe.transform.Rotate(canoeRotation.z - beforeRotation.x, rVelocity * Time.deltaTime, canoeRotation.x - beforeRotation.z);
+            canoe.transform.Translate(velocity.x * Time.deltaTime, 0, velocity.z * Time.deltaTime);
+            canoe.transform.Rotate(canoeRotation.z - beforeRotation.x, rVelocity * Time.deltaTime, canoeRotation.x - beforeRotation.z);
+        }
     }
 
     void ParametorUpdate()

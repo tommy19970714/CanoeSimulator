@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class HostNetworkManager : NetworkManager {
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         this.StartHost();
         Debug.Log(this.networkAddress);
 	}
