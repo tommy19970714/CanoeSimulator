@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/EndScene.unity
     guid: 6e568910f02fd4d5ea92f5f7d1027576
+  - enabled: 1
+    path: Assets/ResetMotionSimulator.unity
+    guid: ddc15a85afb4dd64e9ee85e97618e59f

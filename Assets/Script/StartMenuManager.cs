@@ -31,7 +31,7 @@ public class StartMenuManager : MonoBehaviour {
 	}
 	
 	public void OnClickHostButton() {
-		SceneManager.LoadScene ("CanueRiver");
+		SceneManager.LoadScene ("ResetMotionSimulator");
 	}
 
 	public void OnClickClientButton() {
