@@ -18,10 +18,11 @@ public class SimulaterManager : MonoBehaviour {
     private float flowLevel = 0; // 水の流れの定数
     private Vector3 paddleAngle = Vector3.zero; //[rad]
 
-    private Vector3 velocity = Vector3.zero;
+    public Vector3 velocity = Vector3.zero;
     private Vector3 position = Vector3.zero;
     private float rVelocity = 0;
-
+    public Vector3 rotationrad = new Vector3(0, 0, 0);
+    
     class Paddle {
         public Vector3 position;
         public Vector3 beforePosition;
@@ -57,10 +58,13 @@ public class SimulaterManager : MonoBehaviour {
     void Update () {
         ParametorUpdate();
         Control();
-        
+
         // カヌーの回転と移動
+        Vector3 canoeRotation = rotationrad * (180.0f / Mathf.PI) * 1.7f;
+        Vector3 beforeRotation = canoe.transform.rotation.eulerAngles;
+
         canoe.transform.Translate(velocity.x * Time.deltaTime, 0, velocity.z * Time.deltaTime);
-        canoe.transform.Rotate(0, rVelocity * Time.deltaTime, 0);
+        canoe.transform.Rotate(canoeRotation.z - beforeRotation.x, rVelocity * Time.deltaTime, canoeRotation.x - beforeRotation.z);
     }
 
     void ParametorUpdate()
@@ -98,14 +102,16 @@ public class SimulaterManager : MonoBehaviour {
         float distance_r = Vector3.Distance(Vector3.zero, paddle_right.position);
         float distance_l = Vector3.Distance(Vector3.zero, paddle_left.position);
 
-        float constXZ = 0.00023f; // xv zvを求めるための定数
-        float constY = 0.085f; // rvを求めるための定数
+        float constXZ = 0.00040f; // xv zvを求めるための定数
+        float constY = 0.045f; // rvを求めるための定数
         float constFliction = 0.05f; //水の抵抗
         float paddleAngleZ_rad = paddleAngle.z * (Mathf.PI / 180.0f); //paddleAngle.zは360度法の値
         // x,z方向の速度を求める
-        velocity.x -= constXZ * ((velocity.x + paddle_xvel_r) * paddle_right.sinkLevel * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad)) + ((velocity.x + paddle_xvel_l) * paddle_left.sinkLevel * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad))));
-        velocity.z -= constXZ * ((velocity.z + paddle_zvel_r) * paddle_right.sinkLevel * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad)) + ((velocity.z + paddle_zvel_l) * paddle_left.sinkLevel * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad))));
-        
+        //velocity.x -= constXZ * ((velocity.x + paddle_xvel_r) * paddle_right.sinkLevel * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad)) + ((velocity.x + paddle_xvel_l) * paddle_left.sinkLevel * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad))));
+        //velocity.z -= constXZ * ((velocity.z + paddle_zvel_r) * paddle_right.sinkLevel * Mathf.Abs(Mathf.Sin(paddleAngleZ_rad)) + ((velocity.z + paddle_zvel_l) * paddle_left.sinkLevel * Mathf.Abs(Mathf.Cos(paddleAngleZ_rad))));
+        velocity.x -= constXZ * ((velocity.x + paddle_xvel_r) * paddle_right.sinkLevel + ((velocity.x + paddle_xvel_l) * paddle_left.sinkLevel));
+        velocity.z -= constXZ * ((velocity.z + paddle_zvel_r) * paddle_right.sinkLevel + ((velocity.z + paddle_zvel_l) * paddle_left.sinkLevel));
+  
         velocity.z *= 0.995f;
         velocity.x *= 0.995f;
         
@@ -116,6 +122,6 @@ public class SimulaterManager : MonoBehaviour {
         rVelocity -= constY * distance_r * (pdz_r * Mathf.Sin(theta_r) + pdx_r * Mathf.Cos(theta_r)) * paddle_right.sinkLevel;
         rVelocity += constY * distance_l * (pdz_l * Mathf.Sin(theta_l) - pdx_l * Mathf.Cos(theta_l)) * paddle_left.sinkLevel;
         //Debug.Log(rVelocity);
-        rVelocity *= 0.90f;
+        rVelocity *= 0.65f;
     }
 }

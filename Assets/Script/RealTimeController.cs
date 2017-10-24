@@ -11,15 +11,15 @@ public class RealTimeController : ControlModel {
 	public UDPServer udpserver;
 	public RealTimeDataManager realtimedata;
 	public GameObject canoe;
+    public SimulaterManager simulaterManager;
 
-	//定数
-	public float realtimeOffset = 0;
+
+    //定数
+    public float realtimeOffset = 0;
 
 	//temp変数
 	private float height;
 	private float beforeheight = 0;
-	public Vector3 rotationrad = new Vector3(0, 0, 0);
-    public Vector3 canoeRotation = Vector3.zero;
 
 	//switch 変数
 	public bool pause = false;
@@ -34,9 +34,7 @@ public class RealTimeController : ControlModel {
 
     void Update()
     {
-        canoeRotation = rotationrad * (180.0f / Mathf.PI) * 5; 
-        Vector3 beforeRotation = canoe.transform.rotation.eulerAngles;
-        canoe.transform.Rotate(new Vector3(canoeRotation.z - beforeRotation.x, 0, canoeRotation.x - beforeRotation.z));
+        
     }
 
     IEnumerator waitThread()
@@ -102,7 +100,7 @@ public class RealTimeController : ControlModel {
 					{
 						//制御動作をここに書くDequeueは必要
 						//マイコンへの制御値をここ書き込む
-						rotationrad = realtimedata.rad.Dequeue();
+						Vector3 rotationrad = realtimedata.rad.Dequeue();
 
 						if (realtimedata.time.Count > 1)
 						{
@@ -119,6 +117,7 @@ public class RealTimeController : ControlModel {
 							height = realtimedata.y.Peek();
 							control_height(height, beforeheight);
 							allControl(rotationrad,true);
+                            simulaterManager.rotationrad = rotationrad;
 						}
 					}
 				}
