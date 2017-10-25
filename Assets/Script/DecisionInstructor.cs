@@ -6,30 +6,31 @@ using UnityEngine.Networking;
 public class DecisionInstructor : NetworkBehaviour {
 
     public Material instructorMaterial;
+    public Material whiteMaterial;
     public Color instructorColor;
 
 	// Use this for initialization
 	void Start () {
 		if(!isLocalPlayer)
         {
-            //GetComponent<Renderer>().material = instructorMaterial;
             GameObject right = transform.Find("Right").gameObject;
             foreach (Transform n in right.transform) GameObject.Destroy(n.gameObject);
-
-            //right.GetComponent<Renderer>().material = instructorMaterial;
+            
             GameObject left = transform.Find("Left").gameObject;
             foreach (Transform n in left.transform) GameObject.Destroy(n.gameObject);
-
-            //left.GetComponent<Renderer>().material = instructorMaterial;
+            
             GameObject cylinder = transform.Find("Cylinder").gameObject;
             foreach (Transform n in cylinder.transform) GameObject.Destroy(n.gameObject);
-            //cylinder.GetComponent<Renderer>().material = instructorMaterial;
 
-            ColorChange();
+            InstructorColor();
         }
+        else
+        {
+            White();
+        }   
 	}
 
-    public void ColorChange()
+    public void InstructorColor()
     {
         Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
 
@@ -39,8 +40,13 @@ public class DecisionInstructor : NetworkBehaviour {
         }
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    public void White()
+    {
+        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.material = whiteMaterial;
+        }
+    }
 }
