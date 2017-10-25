@@ -29,27 +29,30 @@ public class StayJudge : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        NetworkIdentity identity = other.GetComponent<NetworkIdentity>();
-        if (other.gameObject.CompareTag("Paddle_right") && identity.isLocalPlayer == true)
+        
+        if (other.gameObject.CompareTag("Paddle_right"))
         {
-            rightSinkCounter++;
+            NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
+            if (identity.isLocalPlayer == true) rightSinkCounter++;
         }
-        else if (other.gameObject.CompareTag("Paddle_left") && identity.isLocalPlayer == true)
+        else if (other.gameObject.CompareTag("Paddle_left"))
         {
-            leftSinkCounter++;
+            NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
+            if (identity.isLocalPlayer == true)  leftSinkCounter++;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        NetworkIdentity identity = other.GetComponent<NetworkIdentity>();
-        if (other.gameObject.CompareTag("Paddle_right") && identity.isLocalPlayer == true)
+        if (other.gameObject.CompareTag("Paddle_right"))
         {
-            rightSinkCounter--;
+            NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
+            if (identity.isLocalPlayer == true) rightSinkCounter--;
         }
-        else if (other.gameObject.CompareTag("Paddle_left") && identity.isLocalPlayer == true)
+        else if (other.gameObject.CompareTag("Paddle_left"))
         {
-            leftSinkCounter--;
+            NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
+            if (identity.isLocalPlayer == true) leftSinkCounter--;
         }
     }
 }
