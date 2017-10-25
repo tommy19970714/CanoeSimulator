@@ -5267,7 +5267,6 @@ MonoBehaviour:
   stayJudge: {fileID: 937653239}
   velocity: {x: 0, y: 0, z: 0}
   rotationrad: {x: 0, y: 0, z: 0}
-  isStarted: 0
 --- !u!4 &1537559422
 Transform:
   m_ObjectHideFlags: 0
