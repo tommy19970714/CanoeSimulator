@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SimulaterManager : MonoBehaviour {
 
@@ -22,8 +23,6 @@ public class SimulaterManager : MonoBehaviour {
     private Vector3 position = Vector3.zero;
     private float rVelocity = 0;
     public Vector3 rotationrad = new Vector3(0, 0, 0);
-
-    public bool isStarted = false;
     
     class Paddle {
         public Vector3 position;
@@ -55,19 +54,27 @@ public class SimulaterManager : MonoBehaviour {
 
     IEnumerator WaitInit()
     {
-        yield return new WaitWhile(() => GameObject.Find("/Paddle(Clone)") == null);
-        isStarted = true;
-
-        paddle = GameObject.Find("/Paddle(Clone)");
-        rightObject = paddle.transform.Find("Right").gameObject;
-        leftObject = paddle.transform.Find("Left").gameObject;
-        paddle_right = new Paddle(rightObject.transform.position);
-        paddle_left = new Paddle(leftObject.transform.position);
+        while(true)
+        {
+            if(paddle == null)
+            {
+                GameObject[] findObjects = GameObject.FindGameObjectsWithTag("networkPaddle");
+                foreach (GameObject obj in findObjects)
+                {
+                    NetworkIdentity identity = obj.GetComponent<NetworkIdentity>();
+                    if (identity.isLocalPlayer == true)
+                    {
+                        this.paddle = obj;
+                        InitObject();
+                    }
+                }
+            }
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
-
     void Update () {
-        if (isStarted)
+        if (paddle != null)
         {
             ParametorUpdate();
             Control();
@@ -79,6 +86,14 @@ public class SimulaterManager : MonoBehaviour {
             canoe.transform.Translate(velocity.x * Time.deltaTime, 0, velocity.z * Time.deltaTime);
             canoe.transform.Rotate(canoeRotation.z - beforeRotation.x, rVelocity * Time.deltaTime, canoeRotation.x - beforeRotation.z);
         }
+    }
+
+    void InitObject()
+    {
+        rightObject = paddle.transform.Find("Right").gameObject;
+        leftObject = paddle.transform.Find("Left").gameObject;
+        paddle_right = new Paddle(rightObject.transform.position);
+        paddle_left = new Paddle(leftObject.transform.position);
     }
 
     void ParametorUpdate()

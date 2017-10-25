@@ -10,6 +10,7 @@ TagManager:
   - Paddle_right
   - Paddle_left
   - Canoe
+  - networkPaddle
   layers:
   - Default
   - TransparentFX
