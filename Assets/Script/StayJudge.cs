@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class StayJudge : MonoBehaviour
 {
@@ -28,11 +29,12 @@ public class StayJudge : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Paddle_right"))
+        NetworkIdentity identity = other.GetComponent<NetworkIdentity>();
+        if (other.gameObject.CompareTag("Paddle_right") && identity.isLocalPlayer == true)
         {
             rightSinkCounter++;
         }
-        else if (other.gameObject.CompareTag("Paddle_left"))
+        else if (other.gameObject.CompareTag("Paddle_left") && identity.isLocalPlayer == true)
         {
             leftSinkCounter++;
         }
@@ -40,11 +42,12 @@ public class StayJudge : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Paddle_right"))
+        NetworkIdentity identity = other.GetComponent<NetworkIdentity>();
+        if (other.gameObject.CompareTag("Paddle_right") && identity.isLocalPlayer == true)
         {
             rightSinkCounter--;
         }
-        else if (other.gameObject.CompareTag("Paddle_left"))
+        else if (other.gameObject.CompareTag("Paddle_left") && identity.isLocalPlayer == true)
         {
             leftSinkCounter--;
         }
