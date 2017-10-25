@@ -5,14 +5,23 @@ using UnityEngine.Networking;
 
 public class HostNetworkManager : NetworkManager {
 
-	// Use this for initialization
-	void Awake () {
-        this.StartHost();
+    // Use this for initialization
+    void Start()
+    {
         Debug.Log(this.networkAddress);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        StartCoroutine("Loop");
+    }
+
+    IEnumerator Loop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2.0f);
+            if (!isNetworkActive)
+            {
+                Debug.Log("startHost");
+                this.StartHost();
+            }
+        }
+    }
 }

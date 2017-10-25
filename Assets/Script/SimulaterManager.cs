@@ -55,7 +55,7 @@ public class SimulaterManager : MonoBehaviour {
 
     IEnumerator WaitInit()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitWhile(() => GameObject.Find("/Paddle(Clone)") == null);
         isStarted = true;
 
         paddle = GameObject.Find("/Paddle(Clone)");
