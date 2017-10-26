@@ -80,7 +80,9 @@ public class SimulaterManager : MonoBehaviour {
             Control();
 
             // カヌーの回転と移動
-            Vector3 canoeRotation = rotationrad * (180.0f / Mathf.PI) * 2.5f;
+            Vector3 canoeRotation = rotationrad * (180.0f / Mathf.PI);
+            canoeRotation.z *= 4.5f;
+            canoeRotation.x *= -6.5f;
             Vector3 beforeRotation = canoe.transform.rotation.eulerAngles;
 
             canoe.transform.Translate(velocity.x * Time.deltaTime, 0, velocity.z * Time.deltaTime);

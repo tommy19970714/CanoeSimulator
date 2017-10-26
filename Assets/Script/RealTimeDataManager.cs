@@ -48,7 +48,7 @@ public class RealTimeDataManager : MonoBehaviour {
 				time.Enqueue(float.Parse(cols[0]) - time_offset);
 			}
 			float radx = -float.Parse(cols[1])/3;
-			float radz = -float.Parse(cols[2])/3;
+			float radz = float.Parse(cols[2])/3;
 			ac.Enqueue(float.Parse(cols[3]));
 
 			radx = a * beforerad.x + (1 - a) * radx;
