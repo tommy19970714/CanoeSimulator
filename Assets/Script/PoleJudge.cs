@@ -7,7 +7,7 @@ public class PoleJudge : MonoBehaviour {
 	public GameController gameController;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         GameObject gameControllerObject = GameObject.Find("/GameController");
         gameController = gameControllerObject.GetComponent<GameController>();
     }
