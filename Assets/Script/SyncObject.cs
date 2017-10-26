@@ -11,7 +11,7 @@ public class SyncObject : NetworkBehaviour
 
     // Use this for initialization
 	void Start () {
-        this.transform.position = new Vector3(240, 80, 60);
+        //this.transform.position = new Vector3(240, 80, 60);
         if(isLocalPlayer)
         {
             syncObject = GameObject.Find("/SteamVR/[CameraRig]/Controller (right)");
@@ -40,4 +40,10 @@ public class SyncObject : NetworkBehaviour
             }
         }
     }
+
+    public override void OnDeserialize(NetworkReader reader, bool initialState)
+    {
+        base.OnDeserialize(reader, initialState);
+    }
+
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
-public class GameController : NetworkBehaviour
+public class GameController : MonoBehaviour
 {
 
     public int polecounter;
@@ -16,7 +16,6 @@ public class GameController : NetworkBehaviour
     public TextAnimation3D textAnimation;
     public TextMesh finishText;
 
-    [SyncVar]
     public float timer = 0;
 
     // Use this for initialization
@@ -26,22 +25,10 @@ public class GameController : NetworkBehaviour
         int layer1 = LayerMask.NameToLayer("Canoe");
         int layer2 = LayerMask.NameToLayer("Paddle");
         Physics.IgnoreLayerCollision(layer1, layer2);
-    }
 
-    public override void OnStartServer()
-    {
+        finishText.gameObject.SetActive(false);
         textAnimation.StartAnimation("Start");
         countLabel.GetComponent<TextMesh>().text = "Score: 0";
-        finishText.gameObject.SetActive(false);
-    }
-
-    public override void OnStartClient()
-    {
-        Time.timeScale = 1.0f;
-        textAnimation.StartAnimation("Start");
-        countLabel.GetComponent<TextMesh>().text = "Score: 0";
-        finishText.gameObject.SetActive(false);
-        Debug.Log("client start tttttttttt");
     }
 
     // Update is called once per frame
@@ -92,7 +79,6 @@ public class GameController : NetworkBehaviour
         textAnimation.StartAnimation("Nice!");
     }
 
-    [Server]
     public void BackMenu()
     {
         if (Input.GetKey(KeyCode.Space))

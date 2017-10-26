@@ -19,9 +19,11 @@ public class UDPServer : MonoBehaviour
 
 	void Start()
 	{
-		//localIpString = PlayerPrefs.GetString ("realtimeUdpIp", "192.168.1.240");
-		//localPort = PlayerPrefs.GetInt ("realtimeUdpPort", 22227);
-		server();
+        //localIpString = PlayerPrefs.GetString ("realtimeUdpIp", "192.168.1.240");
+        //localPort = PlayerPrefs.GetInt ("realtimeUdpPort", 22227);
+        localIpString = UnityEngine.Network.player.ipAddress;
+
+        server();
 		lockobject = new object();
 	}
 

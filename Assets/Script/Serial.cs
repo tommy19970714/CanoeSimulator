@@ -20,7 +20,7 @@ public class Serial : MonoBehaviour
 	//シリアル通信の開始、シリアルからの出力を取得
 	void Awake()
 	{
-		com = PlayerPrefs.GetString("serialCom");
+        com = "COM4";//PlayerPrefs.GetString("serialCom");
 		//baudrate = PlayerPrefs.GetInt("serialBoadrate");
 
 		port = new SerialPort(com, baudrate, Parity.None, 8, StopBits.One);

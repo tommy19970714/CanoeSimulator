@@ -49,4 +49,10 @@ public class DecisionInstructor : NetworkBehaviour {
             renderer.material = whiteMaterial;
         }
     }
+
+    public override void OnDeserialize(NetworkReader reader, bool initialState)
+    {
+        base.OnDeserialize(reader, initialState);
+    }
+
 }

@@ -33,12 +33,12 @@ public class StayJudge : MonoBehaviour
         if (other.gameObject.CompareTag("Paddle_right"))
         {
             NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
-            if (identity.isLocalPlayer == true) rightSinkCounter++;
+            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled) rightSinkCounter++;
         }
         else if (other.gameObject.CompareTag("Paddle_left"))
         {
             NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
-            if (identity.isLocalPlayer == true)  leftSinkCounter++;
+            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled)  leftSinkCounter++;
         }
     }
 
@@ -47,12 +47,12 @@ public class StayJudge : MonoBehaviour
         if (other.gameObject.CompareTag("Paddle_right"))
         {
             NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
-            if (identity.isLocalPlayer == true) rightSinkCounter--;
+            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled) rightSinkCounter--;
         }
         else if (other.gameObject.CompareTag("Paddle_left"))
         {
             NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
-            if (identity.isLocalPlayer == true) leftSinkCounter--;
+            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled) leftSinkCounter--;
         }
     }
 }

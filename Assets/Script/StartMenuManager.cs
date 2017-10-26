@@ -24,7 +24,11 @@ public class StartMenuManager : MonoBehaviour {
 			List<string> portList = new List<string>();
 			portList.AddRange (ports);
 			dropdown.AddOptions(portList);
-			dropdown.value = 0;
+            for(int i=0;i<portList.Count;i++) {
+                if(portList[i] == PlayerPrefs.GetString("serialCom")) {
+                    dropdown.value = i;
+                }
+            }
 		}
 
 		ipAddressLabel.text = "IPAddress: " + UnityEngine.Network.player.ipAddress;
@@ -40,12 +44,11 @@ public class StartMenuManager : MonoBehaviour {
 		SceneManager.LoadScene ("Client");
 	}
 
-	public void ValueChnagedDropDown(Dropdown dropdown) {
-		Debug.Log("dropdown.value = " + dropdown.value);    //値を取得（先頭から連番(0～n-1)）
-		Debug.Log("text(options) = " + dropdown.options[dropdown.value].text); //リストからテキストを取得
-		Debug.Log("text(captionText) = " + dropdown.captionText.text); //Labelからテキストを取得
-		PlayerPrefs.SetString("serialCom", dropdown.options[dropdown.value].text);
+	public void ValueChnagedDropDown(int value) {
+		PlayerPrefs.SetString("serialCom", dropdown.options[value].text);
 		PlayerPrefs.Save ();
+        Debug.Log(dropdown.options[value].text);
+        Debug.Log("dropdown change");
 	}
 
 	public void ValueChangedPortField() {
