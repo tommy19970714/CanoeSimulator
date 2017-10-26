@@ -44,11 +44,11 @@ public class RealTimeController : ControlModel {
 		yield return new WaitForSeconds (realtimeOffset);
 
 		Debug.Log ("thread start");
-        startmotion();
+        startMotion();
 
     }
 
-	public void startmotion()
+	public void startMotion()
 	{
 		udpserver.threadrestart();
 		serial.dumpstop();
@@ -60,7 +60,7 @@ public class RealTimeController : ControlModel {
 		Debug.Log("start");
 	}
 
-	public void stopmotion()
+	public void stopMotion()
 	{
 		pause = true;
 		started = false;
@@ -70,9 +70,21 @@ public class RealTimeController : ControlModel {
 		Debug.Log("stop");
 	}
 
-	//UDPで受信したデータをもとに時間同期をして仮想オブジェクトを動かす
-	//UDPの受信側のほうが早いためキューの中身がなくなることはないはず
-	void OnApplicationQuit()
+    public void initMotion()
+    {
+        stopMotion();
+        serial.dumpinitialize();
+    }
+
+    public void endMotion()
+    {
+        stopMotion();
+        serial.close();
+    }
+
+    //UDPで受信したデータをもとに時間同期をして仮想オブジェクトを動かす
+    //UDPの受信側のほうが早いためキューの中身がなくなることはないはず
+    void OnApplicationQuit()
 	{
 		started = false;
 		stopthread();

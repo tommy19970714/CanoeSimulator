@@ -3655,6 +3655,7 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  gameController: {fileID: 1819616882}
 --- !u!4 &945841482
 Transform:
   m_ObjectHideFlags: 0

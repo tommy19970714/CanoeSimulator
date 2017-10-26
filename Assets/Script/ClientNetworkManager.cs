@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class ClientNetworkManager : NetworkManager
 {
+    public GameController gameController;
 
     // Use this for initialization
     void Start()
@@ -24,5 +25,11 @@ public class ClientNetworkManager : NetworkManager
                 StartClient();
             }
         }
+    }
+
+    public override  void OnClientConnect(NetworkConnection conn)
+    {
+        base.OnClientConnect(conn);
+        gameController.ClientStart();
     }
 }

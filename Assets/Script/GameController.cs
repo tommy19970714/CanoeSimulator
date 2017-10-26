@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     private int LimitTime = 60;
     public TextAnimation3D textAnimation;
     public TextMesh finishText;
-    public Serial serial;
+    public RealTimeController realtimeController;
 
     public float timer = 0;
 
@@ -28,6 +28,20 @@ public class GameController : MonoBehaviour
         Physics.IgnoreLayerCollision(layer1, layer2);
 
         finishText.gameObject.SetActive(false);
+    }
+
+    public void HostStart()
+    {
+        timer = 0;
+        textAnimation.StartAnimation("Start");
+        countLabel.GetComponent<TextMesh>().text = "Score: 0";
+    }
+
+    public void ClientStart()
+    {
+        SteamVR_Fade.Start(Color.clear, 0);
+        Pauser.Resume();
+        timer = 0;
         textAnimation.StartAnimation("Start");
         countLabel.GetComponent<TextMesh>().text = "Score: 0";
     }
@@ -56,11 +70,8 @@ public class GameController : MonoBehaviour
             countLabel.SetActive(false);
             finishText.gameObject.SetActive(true);
             finishText.text = "Your Score : " + polecounter.ToString();
-            if (serial != null)
-            {
-                serial.dumpstop();
-                serial.dumpinitialize();
-            }
+            if (realtimeController != null) realtimeController.initMotion();
+            
             Pauser.Pause();
             SteamVR_Fade.Start(Color.clear, 0f);
             SteamVR_Fade.Start(new Color(0,0,0,0.8f), 2.5f);
@@ -68,10 +79,9 @@ public class GameController : MonoBehaviour
         timerLabel.GetComponent<TextMesh>().text = "残り時間:" + remainTime.ToString() + "秒";
 
         // 初期画面に戻る
-        if (Input.GetKey(KeyCode.Escape) || (Input.GetKey(KeyCode.Space) && remainTime < 0))
+        if (Input.GetKey(KeyCode.Escape) || ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return)) && remainTime < 0))
         {
-            serial.dumpstop();
-            serial.close();
+            if (realtimeController != null)  realtimeController.endMotion();
             SceneManager.LoadScene("StartScene");
         }
     }
