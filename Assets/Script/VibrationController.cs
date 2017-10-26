@@ -33,17 +33,17 @@ public class VibrationController : MonoBehaviour
         {
             if (rightController.isActiveAndEnabled)
             {
-                StartCoroutine(controllerTouchpadTriger(rightController));
+                controllerTouchpadTriger(rightController);
 
             }
             else if (leftController.isActiveAndEnabled)
             {
-                StartCoroutine(controllerTouchpadTriger(leftController));
+                controllerTouchpadTriger(leftController);
             }
         }
     }
 
-    IEnumerator controllerTouchpadTriger(SteamVR_TrackedObject controller)
+    void controllerTouchpadTriger(SteamVR_TrackedObject controller)
     {
         var device = SteamVR_Controller.Input((int)controller.index);
         string requestURL = "";
@@ -51,23 +51,33 @@ public class VibrationController : MonoBehaviour
         {
             Debug.Log("タッチパッドをクリックした");
             Vector2 position = device.GetAxis();
-            double strong = (position.y + 1) / 2;
-            requestURL = vibrationServer + "/0/on?" + "strength=" + strong.ToString("0.000") + "&interval=500"+ "&duty=0.5";
+            float strong = (position.y) / 2;
+            if(strong > 0) { //左のバイブレーションを振動
+                float sendStrong = Mathf.Sqrt(strong);
+                requestURL = vibrationServer + "/1/on?" + "strength=" + strong.ToString("0.000") + "&interval=500" + "&duty=0.5";
+            } else if (strong < 0) { //右のバイブレーションを振動
+                float sendStrong = Mathf.Sqrt(-strong);
+                requestURL = vibrationServer + "/0/on?" + "strength=" + sendStrong.ToString("0.000") + "&interval=500" + "&duty=0.5";
+            }
+            StartCoroutine(SendRequest(requestURL));
         }
         if (device.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
         {
             Debug.Log("タッチパッドをクリックして離した");
             requestURL = vibrationServer + "/0/off";
+            StartCoroutine(SendRequest(requestURL));
+            requestURL = vibrationServer + "/1/off";
+            StartCoroutine(SendRequest(requestURL));
         }
-        if (requestURL.Length != 0)
-        {
-            UnityWebRequest request = UnityWebRequest.Get(requestURL);
-            yield return new WaitWhile(() => (responseSW == true));
-            responseSW = true;
-            Debug.Log(requestURL);
-            //yield return request.SendWebRequest();
-            responseSW = false;
-            
-        }
+    }
+
+    IEnumerator SendRequest(string requestURL)
+    {
+        UnityWebRequest request = UnityWebRequest.Get(requestURL);
+        yield return new WaitWhile(() => (responseSW == true));
+        responseSW = true;
+        Debug.Log(requestURL);
+        yield return request.SendWebRequest();
+        responseSW = false;
     }
 }
