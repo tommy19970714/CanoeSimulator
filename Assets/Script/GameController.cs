@@ -82,10 +82,13 @@ public class GameController : MonoBehaviour
         timerLabel.GetComponent<TextMesh>().text = "残り時間:" + remainTime.ToString() + "秒";
 
         // 初期画面に戻る
-        if (Input.GetKey(KeyCode.Escape) || ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return)) && remainTime < 0))
+        if (Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Return) && remainTime < 0 )
         {
             if (realtimeController != null)  realtimeController.endMotion();
             SceneManager.LoadScene("StartScene");
+        } else if(Input.GetKey(KeyCode.Space) && remainTime < 0)
+        {
+            SceneManager.LoadScene("ResetMotionSimulator");
         }
     }
 
