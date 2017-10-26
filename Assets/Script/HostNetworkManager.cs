@@ -9,7 +9,7 @@ public class HostNetworkManager : NetworkManager {
     public GameController gameController;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         Debug.Log(this.networkAddress);
         StartCoroutine("Loop");

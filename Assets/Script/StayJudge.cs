@@ -55,12 +55,12 @@ public class StayJudge : MonoBehaviour
 
     void GenerateWave(Transform transform)
     {
-        if(Time.time - beforeWaveTime > 0.7f)
+        if (Time.time - beforeWaveTime > 0.7f && paddle != null)
         {
             beforeWaveTime = Time.time;
             float velocity = ((paddle.transform.position - beforePaddlePos) / Time.deltaTime).magnitude;
             GameObject newWave = Instantiate(wave, transform.position, Quaternion.identity);
-            newWave.GetComponent<WaveGenerator>().Play(velocity / 20.0f);
+            newWave.GetComponent<WaveGenerator>().Play(velocity);
         }
     }
 
