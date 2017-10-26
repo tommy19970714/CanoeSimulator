@@ -44,6 +44,9 @@ public class GameController : MonoBehaviour
         timer = 0;
         textAnimation.StartAnimation("Start");
         countLabel.GetComponent<TextMesh>().text = "Score: 0";
+        timerLabel.SetActive(true);
+        countLabel.SetActive(true);
+        finishText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -74,7 +77,7 @@ public class GameController : MonoBehaviour
             
             Pauser.Pause();
             SteamVR_Fade.Start(Color.clear, 0f);
-            SteamVR_Fade.Start(new Color(0,0,0,0.8f), 2.5f);
+            SteamVR_Fade.Start(new Color(0,0,0,0.85f), 2.5f);
         }
         timerLabel.GetComponent<TextMesh>().text = "残り時間:" + remainTime.ToString() + "秒";
 
