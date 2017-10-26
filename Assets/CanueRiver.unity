@@ -3098,6 +3098,7 @@ GameObject:
   - component: {fileID: 848546891}
   - component: {fileID: 848546892}
   - component: {fileID: 848546893}
+  - component: {fileID: 848546894}
   m_Layer: 12
   m_Name: CanoeObject
   m_TagString: Canoe
@@ -3298,6 +3299,17 @@ MeshCollider:
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 7e3cb48e0800a461c94dbad57baee893, type: 3}
+--- !u!114 &848546894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 848546887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d9f30d1e468134a9e35884c483982f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &860394785
 GameObject:
   m_ObjectHideFlags: 0
@@ -5873,6 +5885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1537559422}
   - component: {fileID: 1537559421}
+  - component: {fileID: 1537559423}
   m_Layer: 0
   m_Name: SimulatorManager
   m_TagString: Untagged
@@ -5910,6 +5923,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1537559423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1537559420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d9f30d1e468134a9e35884c483982f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1571160845
 GameObject:
   m_ObjectHideFlags: 0

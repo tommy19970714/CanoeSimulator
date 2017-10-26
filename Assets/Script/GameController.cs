@@ -12,9 +12,10 @@ public class GameController : MonoBehaviour
     public GameObject countLabel;
     public GameObject timerLabel;
     private List<int> idList = new List<int>();
-    private int LimitTime = 90;
+    private int LimitTime = 60;
     public TextAnimation3D textAnimation;
     public TextMesh finishText;
+    public Serial serial;
 
     public float timer = 0;
 
@@ -55,7 +56,8 @@ public class GameController : MonoBehaviour
             countLabel.SetActive(false);
             finishText.gameObject.SetActive(true);
             finishText.text = "Your Score : " + polecounter.ToString();
-            Time.timeScale = 0;
+            Pauser.Pause();
+            if(serial != null) serial.dumpinitialize();
         }
         timerLabel.GetComponent<TextMesh>().text = "残り時間:" + remainTime.ToString() + "秒";
 
@@ -81,10 +83,6 @@ public class GameController : MonoBehaviour
 
     public void BackMenu()
     {
-        if (Input.GetKey(KeyCode.Space))
-        { // もう一度
-            SceneManager.LoadScene("CanueRiver");
-        }
         if (Input.GetKey(KeyCode.Space))
         { // 初期画面に戻る 
             SceneManager.LoadScene("StartScene");
