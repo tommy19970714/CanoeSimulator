@@ -59,13 +59,13 @@ ParticleAnimator:
     rgba: 3539992575
   colorAnimation[2]:
     serializedVersion: 2
-    rgba: 2028660626
+    rgba: 2026042007
   colorAnimation[3]:
     serializedVersion: 2
     rgba: 1023410175
   colorAnimation[4]:
     serializedVersion: 2
-    rgba: 16768608
+    rgba: 14024544
   worldRotationAxis: {x: 0, y: 0, z: 0}
   localRotationAxis: {x: 0, y: 0, z: 0}
   sizeGrow: 0.71
@@ -86,9 +86,9 @@ EllipsoidParticleEmitter:
   minSize: 0.15
   maxSize: 0.94
   minEnergy: 0.04
-  maxEnergy: 1.45
+  maxEnergy: 0.54
   minEmission: 1.4
-  maxEmission: 3.89
+  maxEmission: 2.83
   worldVelocity: {x: 0, y: 0, z: 0}
   localVelocity: {x: 0, y: 0.4, z: 0}
   rndVelocity: {x: 0, y: 0, z: 0}
