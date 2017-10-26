@@ -6,19 +6,45 @@ using UnityEngine.Networking;
 public class StayJudge : MonoBehaviour
 {
     public int rightSinkCounter = 0;
+
     public int leftSinkCounter = 0;
+
+    public GameObject wave;
+    public GameObject paddle;
+    public Vector3 beforePaddlePos;
+
+    public float beforeWaveTime;
 
     // Use this for initialization
     void Start()
     {
+        StartCoroutine("WaitInit");
+    }
 
+    IEnumerator WaitInit()
+    {
+        while (true)
+        {
+            if (paddle == null)
+            {
+                GameObject[] findObjects = GameObject.FindGameObjectsWithTag("networkPaddle");
+                foreach (GameObject obj in findObjects)
+                {
+                    NetworkIdentity identity = obj.GetComponent<NetworkIdentity>();
+                    if (identity.isLocalPlayer == true)
+                    {
+                        this.paddle = obj;
+                    }
+                }
+            }
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("right" + rightSinkCounter.ToString());
-        //Debug.Log("left" + leftSinkCounter.ToString());
+        if(paddle != null) beforePaddlePos = paddle.transform.position;
     }
 
     private void OnTriggerStay(Collider collider)
@@ -27,18 +53,37 @@ public class StayJudge : MonoBehaviour
 
     }
 
+    void GenerateWave(Transform transform)
+    {
+        if(Time.time - beforeWaveTime > 0.7f)
+        {
+            beforeWaveTime = Time.time;
+            float velocity = ((paddle.transform.position - beforePaddlePos) / Time.deltaTime).magnitude;
+            GameObject newWave = Instantiate(wave, transform.position, Quaternion.identity);
+            newWave.GetComponent<WaveGenerator>().Play(velocity / 20.0f);
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        
+
         if (other.gameObject.CompareTag("Paddle_right"))
         {
             NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
-            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled) rightSinkCounter++;
+            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled)
+            {
+                rightSinkCounter++;
+                if (rightSinkCounter == 126) GenerateWave(other.transform);
+            }
         }
         else if (other.gameObject.CompareTag("Paddle_left"))
         {
             NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
-            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled)  leftSinkCounter++;
+            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled)
+            {
+                leftSinkCounter++;
+                if (leftSinkCounter == 126) GenerateWave(other.transform);
+            }
         }
     }
 
@@ -47,12 +92,20 @@ public class StayJudge : MonoBehaviour
         if (other.gameObject.CompareTag("Paddle_right"))
         {
             NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
-            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled) rightSinkCounter--;
+            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled)
+            {
+                rightSinkCounter--;
+                if (rightSinkCounter == 0) GenerateWave(other.transform);
+            }
         }
         else if (other.gameObject.CompareTag("Paddle_left"))
         {
             NetworkIdentity identity = other.transform.parent.GetComponentInParent<NetworkIdentity>();
-            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled) leftSinkCounter--;
+            if (identity.isLocalPlayer == true && identity.isActiveAndEnabled)
+            {
+                leftSinkCounter--;
+                if (leftSinkCounter == 0) GenerateWave(other.transform);
+            }
         }
     }
 }
