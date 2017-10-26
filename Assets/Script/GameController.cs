@@ -56,12 +56,14 @@ public class GameController : MonoBehaviour
             countLabel.SetActive(false);
             finishText.gameObject.SetActive(true);
             finishText.text = "Your Score : " + polecounter.ToString();
-            Pauser.Pause();
             if (serial != null)
             {
                 serial.dumpstop();
                 serial.dumpinitialize();
             }
+            Pauser.Pause();
+            SteamVR_Fade.Start(Color.clear, 0f);
+            SteamVR_Fade.Start(new Color(0,0,0,0.8f), 2.5f);
         }
         timerLabel.GetComponent<TextMesh>().text = "残り時間:" + remainTime.ToString() + "秒";
 
