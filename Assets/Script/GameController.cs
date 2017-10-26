@@ -57,13 +57,19 @@ public class GameController : MonoBehaviour
             finishText.gameObject.SetActive(true);
             finishText.text = "Your Score : " + polecounter.ToString();
             Pauser.Pause();
-            if(serial != null) serial.dumpinitialize();
+            if (serial != null)
+            {
+                serial.dumpstop();
+                serial.dumpinitialize();
+            }
         }
         timerLabel.GetComponent<TextMesh>().text = "残り時間:" + remainTime.ToString() + "秒";
 
-        if (remainTime < 0) BackMenu();
-        if (Input.GetKey(KeyCode.Escape))
-        { // 初期画面に戻る 
+        // 初期画面に戻る
+        if (Input.GetKey(KeyCode.Escape) || (Input.GetKey(KeyCode.Space) && remainTime < 0))
+        {
+            serial.dumpstop();
+            serial.close();
             SceneManager.LoadScene("StartScene");
         }
     }
@@ -79,13 +85,5 @@ public class GameController : MonoBehaviour
         countLabel.GetComponent<TextMesh>().text = "Score: " + polecounter.ToString();
 
         textAnimation.StartAnimation("Nice!");
-    }
-
-    public void BackMenu()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        { // 初期画面に戻る 
-            SceneManager.LoadScene("StartScene");
-        }
     }
 }

@@ -19,7 +19,7 @@ public class TextAnimation3D : MonoBehaviour
     void Update()
     {
         Color color = this.GetComponent<MeshRenderer>().material.color;
-        color.a -= 0.017f;
+        color.a -= 0.014f;
         GetComponent<MeshRenderer>().material.color = color;
         if(color.a < 0) {
             gameObject.SetActive(false);

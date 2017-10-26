@@ -1006,6 +1006,7 @@ MonoBehaviour:
   timerLabel: {fileID: 645672482}
   textAnimation: {fileID: 1488735858}
   finishText: {fileID: 1584633284}
+  serial: {fileID: 2116676146}
   timer: 0
 --- !u!4 &372310632
 Transform:
