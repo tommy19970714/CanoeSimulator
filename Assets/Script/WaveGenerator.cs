@@ -6,7 +6,7 @@ public class WaveGenerator : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+        StartCoroutine("WaitInit");
     }
 	
 	// Update is called once per frame
@@ -25,6 +25,14 @@ public class WaveGenerator : MonoBehaviour {
         audioSource.Play();
 
         EllipsoidParticleEmitter emitter = GetComponent<EllipsoidParticleEmitter>();
-        emitter.Emit((int)value * 5);
+        emitter.Emit((int)value * 10);
+
+        
+    }
+
+    IEnumerator WaitInit()
+    {
+        yield return new WaitForSeconds(1.2f);
+        Destroy(this.gameObject);
     }
 }

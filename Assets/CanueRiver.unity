@@ -3629,7 +3629,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightSinkCounter: 0
   leftSinkCounter: 0
-  wave: {fileID: 1931849074783548, guid: 2a1ac078034dfa546adf3456b035cdd8, type: 2}
+  wave: {fileID: 1187594867351752, guid: 2a1ac078034dfa546adf3456b035cdd8, type: 2}
+  paddle: {fileID: 0}
+  beforePaddlePos: {x: 0, y: 0, z: 0}
+  beforeWaveTime: 0
 --- !u!23 &937653240
 MeshRenderer:
   m_ObjectHideFlags: 0
