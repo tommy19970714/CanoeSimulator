@@ -128,7 +128,7 @@ public class RealTimeController : ControlModel {
 							beforeheight = realtimedata.y.Dequeue();
 							height = realtimedata.y.Peek();
 							control_height(height, beforeheight);
-							allControl(rotationrad,true);
+                            allControl(rotationrad * 2.0f,true);
                             simulaterManager.rotationrad = rotationrad;
 						}
 					}
