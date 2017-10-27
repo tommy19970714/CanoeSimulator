@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
         SteamVR_Fade.Start(Color.clear, 0);
         Pauser.Resume();
         timer = 0;
+        polecounter = 0;
         textAnimation.StartAnimation("Start");
         countLabel.GetComponent<TextMesh>().text = "Score: 0";
         timerLabel.SetActive(true);
