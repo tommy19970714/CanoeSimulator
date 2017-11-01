@@ -134,7 +134,7 @@ public class SimulaterManager : MonoBehaviour {
         float distance_l = Vector3.Distance(Vector3.zero, paddle_left.position);
 
         float constXZ = 0.00040f; // xv zvを求めるための定数
-        float constY = 0.045f; // rvを求めるための定数
+        float constY = 0.07f; // rvを求めるための定数
         float constFliction = 0.05f; //水の抵抗
         float paddleAngleZ_rad = paddleAngle.z * (Mathf.PI / 180.0f); //paddleAngle.zは360度法の値
         // x,z方向の速度を求める
